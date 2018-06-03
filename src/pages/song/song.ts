@@ -1,25 +1,63 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
+import { RecorderProvider, RecorderState }  from '../../providers/recorder/recorder';
 
-/**
- * Generated class for the SongPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-song',
-  templateUrl: 'song.html',
+  templateUrl: 'song.html'
 })
 export class SongPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  recorderState = RecorderState;
+  
+  constructor(public navCtrl: NavController, 
+              public alertCtrl: AlertController,
+              public recorder: RecorderProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SongPage');
+  startRecording() {
+    try {
+      this.recorder.startRecording();
+    }
+    catch (e) {
+      this.showAlert('Could not start recording.');
+    }
+  }
+
+  stopRecording() {
+    try {
+      this.recorder.stopRecording();
+    }
+    catch (e) {
+      this.showAlert('Could not stop recording.');
+    }
+  }
+
+  startPlayback() {
+    try {
+      this.recorder.startPlayback();
+    }
+    catch (e) {
+      this.showAlert('Could not play recording.');
+    }
+  }
+
+  stopPlayback() {
+    try {
+      this.recorder.stopPlayback();
+    }
+    catch (e) {
+      this.showAlert('Could not stop playing recording.');
+    }
+  } 
+
+  showAlert(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MediaPlugin } from 'ionic-native';
 
-export enum AudioRecorderState {
+export enum RecorderState {
     Ready,
     Recording,
     Recorded,
@@ -12,11 +12,11 @@ export enum AudioRecorderState {
 export class RecorderProvider {
   
   mediaPlugin: MediaPlugin = null;
-  state: AudioRecorderState = AudioRecorderState.Ready;
+  state: RecorderState = RecorderState.Ready;
 
   get MediaPlugin(): MediaPlugin {
     if (this.mediaPlugin == null) {
-      this.mediaPlugin = new MediaPlugin('../Library/NoCloud/recording.wav');
+      // this.mediaPlugin = new MediaPlugin('../Library/NoCloud/recording.wav');
     }
 
     return this.mediaPlugin;
@@ -24,22 +24,22 @@ export class RecorderProvider {
 
   startRecording() {
     this.MediaPlugin.startRecord();
-    this.state = AudioRecorderState.Recording;
+    this.state = RecorderState.Recording;
   }
 
   stopRecording() {
     this.MediaPlugin.stopRecord();
-    this.state = AudioRecorderState.Recorded;
+    this.state = RecorderState.Recorded;
   }
 
   startPlayback() {
     this.MediaPlugin.play();
-    this.state = AudioRecorderState.Playing;
+    this.state = RecorderState.Playing;
   }
 
   stopPlayback() {
     this.MediaPlugin.stop();
-    this.state = AudioRecorderState.Ready;
+    this.state = RecorderState.Ready;
   }
 
 }

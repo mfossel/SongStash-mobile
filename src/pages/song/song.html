@@ -7,5 +7,28 @@
 
 
 <ion-content padding>
-
+  <p>
+    <button (click)="startRecording()" class="buttton-start-recording" [disabled]="recorder.state != recorderState.Ready">
+      <ion-icon name="microphone"></ion-icon>
+      Start recording
+    </button>
+  </p>
+  <p>
+    <button (click)="stopRecording()" class="buttton-stop-recording" [disabled]="recorder.state != recorderState.Recording">
+      <ion-icon name="mic-off"></ion-icon>
+      Stop recording
+    </button>
+  </p>
+  <p>
+    <button (click)="startPlayback()" class="buttton-start-playback" [disabled]="recorder.state != recorderState.Recorded">
+      <ion-icon name="play"></ion-icon>
+      Start playback
+    </button>
+  </p>
+  <p>
+    <button (click)="stopPlayback()" class="buttton-stop-playback" [disabled]="recorder.state != recorderState.Playing">
+      <ion-icon name="square"></ion-icon>
+      Stop playback
+    </button>
+  </p>
 </ion-content>
